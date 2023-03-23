@@ -1,0 +1,32 @@
+% Cargar una imagen
+imagen = imread('einstein_imagen.jpg');
+M=1000;
+imagen= rgb2gray(imagen);
+imagen = imresize(imagen,[M M]);
+
+% Definir la distancia entre las franjas
+distancia = 10;
+
+% Definir el tamaño de la matriz
+[filas, columnas] = size(imagen);
+
+% Crear la matriz de franjas
+matriz_franjas = zeros(filas, columnas);
+
+for i = 1:filas
+    for j = 1:columnas
+        if mod(floor(j / distancia), 2) == 0
+            matriz_franjas(i, j) = 0.5;
+        else
+            matriz_franjas(i, j) = 1;
+        end
+    end
+end
+
+% Multiplicar la matriz de franjas por la imagen
+img_borrosa = double(imagen) .* matriz_franjas;
+
+% Mostrar la imagen borrosa
+figure(11)
+imshow(uint8(img_borrosa));
+
