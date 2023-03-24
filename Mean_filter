@@ -1,7 +1,7 @@
 % Cargar la imagen
-img = imread('nombre_de_la_imagen.jpg');
+img = imread('einstein_imagen.jpg');
 
-% Definir el tamaño del filtro
+% Definir el tamaño del filtro. Cambiando esto, aparece más borrosa o menos.
 filtro_tam = 5;
 
 % Crear el filtro de promedio
@@ -11,9 +11,9 @@ filtro_prom = ones(filtro_tam) / filtro_tam^2;
 img_filtrada = imfilter(img, filtro_prom);
 
 % Mostrar la imagen original y la imagen filtrada
-subplot(1,2,1);
+figure(1);
 imshow(img);
 title('Imagen original');
-subplot(1,2,2);
+figure(2);
 imshow(img_filtrada);
 title('Imagen filtrada con mean filter');
