@@ -1,0 +1,19 @@
+% Cargar la imagen
+img = imread('nombre_de_la_imagen.jpg');
+
+% Definir el tamaño del filtro
+filtro_tam = 5;
+
+% Crear el filtro de promedio
+filtro_prom = ones(filtro_tam) / filtro_tam^2;
+
+% Aplicar el filtro a la imagen
+img_filtrada = imfilter(img, filtro_prom);
+
+% Mostrar la imagen original y la imagen filtrada
+subplot(1,2,1);
+imshow(img);
+title('Imagen original');
+subplot(1,2,2);
+imshow(img_filtrada);
+title('Imagen filtrada con mean filter');
