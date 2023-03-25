@@ -1,0 +1,32 @@
+% Cargar una imagen
+imagen = imread('facultad.jpg');
+M=1000;
+imagen= rgb2gray(imagen);
+imagen = imresize(imagen,[M M]);
+
+% Definir la distancia entre las franjas
+distancia = 5;
+
+% Definir el tamaño de la matriz
+[filas, columnas] = size(imagen);
+
+% Crear la matriz de franjas
+matriz_franjas = zeros(filas, columnas);
+
+for i = 1:columnas
+    for j = 1:filas
+        if mod(floor(i / distancia), 2) == 0
+            matriz_franjas(i, j) = 0.3;
+        else
+            matriz_franjas(i, j) = 1;
+        end
+    end
+end
+
+% Multiplicar la matriz de franjas por la imagen
+img_borrosa = double(imagen) .* matriz_franjas;
+
+% Mostrar la imagen borrosa
+figure(11)
+imshow(uint8(img_borrosa));
+
