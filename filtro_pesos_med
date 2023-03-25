@@ -1,0 +1,47 @@
+%The Weighted Average filter smooths stripe data by computing a new location for each pixel. 
+%For each pixel in the stripe, this filter will use a weighted average of
+%its neighboring pixels to compute a new location. 
+% Nos hace la media de los píxeles vecinos.
+
+%B = imfilter(A, w, filtering_mode, boundary_options, size_options);
+%Significado cosas con las que llamamos a la función.
+
+%A es la imagen original.
+%w es la matriz de pesos para el filtro de promedio ponderado. Debe ser una matriz cuadrada de tamaño impar, cuyos valores sumen 1.
+%filtering_mode es el modo de filtrado, que puede ser 'conv' para convolución o 'corr' para correlación.
+%boundary_options es la opción de borde, que puede ser 'replicate', 'symmetric', 'circular' o 'fill'.
+%size_options es la opción de tamaño de salida, que puede ser 'same' para mantener el mismo tamaño de la imagen original, o 'full' para el tamaño completo de la imagen filtrada.
+
+% Cargar una imagen
+img = imread(['einstein_imagen.jpg']);
+M=500;
+img= rgb2gray(img);
+img = imresize(img,[M M]);
+
+% Crear la matriz de pesos para el filtro de promedio ponderado (matriz
+% 3x3, menos blurred)
+%
+%w = [1/16 2/16 0/16; 2/16 0/16 7/16; 1/16 2/16 1/16];
+
+% Crear la matriz de pesos para el filtro de promedio ponderado (matriz
+% 5x5, más blurred)
+%w = [1/25 1/25 1/25 1/25 1/25;     1/25 1/25 1/25 1/25 1/25;     1/25 1/25 1/25 1/25 1/25;     1/25 1/25 1/25 1/25 1/25;     1/25 1/25 1/25 1/25 1/25];
+
+%Filtro 7x7:
+w = [1/49 1/49 1/49 1/49 1/49 1/49 1/49; 1/49 1/49 1/49 1/49 1/49 1/49 1/49;
+    1/49 1/49 1/49 1/49 1/49 1/49 1/49;1/49 1/49 1/49 1/49 1/49 1/49 1/49;
+    1/49 1/49 1/49 1/49 1/49 1/49 1/49;1/49 1/49 1/49 1/49 1/49 1/49 1/49;
+    1/49 1/49 1/49 1/49 1/49 1/49 1/49]
+
+
+% Aplicar el filtro de promedio ponderado a la imagen
+img_filt = imfilter(img, w, 'corr', 'circular', 'same');
+
+% Mostrar la imagen original y la imagen filtrada
+
+figure(1)
+imshow(img);
+title('Imagen original');
+figure(2)
+imshow(img_filt);
+%title('Imagen filtrada');
