@@ -1,0 +1,18 @@
+% Leer imagen en blanco y negro
+imagen = imread('beatles.jpg');
+imagen = rgb2gray(imagen); % Convertir a escala de grises
+
+% Agregar ruido gaussiano con una desviación estándar de 20
+imagen_con_ruido = imnoise(imagen, 'gaussian', 0, (50/255)^2);  % si aumentamos este cuarto valor la imagen tendrá más ruido, es la desviación estándar creo.
+
+
+% Mostrar imagen original
+figure(1);
+imshow(imagen, 'InitialMagnification', 'fit');
+title('Imagen Original');
+
+% Mostrar imagen con ruido
+figure(2);
+imshow(imagen_con_ruido, 'InitialMagnification', 'fit');
+title('Imagen con ruido gaussiano');
+
