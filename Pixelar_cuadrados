@@ -1,5 +1,5 @@
 %https://anishsachdeva.medium.com/creating-a-pixelating-effect-in-images-using-matlab-982d6f997cc3
-% Entiendo que habrá que cambiar la imagen a 2D.
+% Entiendo qe habrá que cambiar la imagen a 2D.
 function W = pixelate(I, w)
     [n, m, ~] = size(I);
     W = I;
