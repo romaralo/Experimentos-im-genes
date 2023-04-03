@@ -1,0 +1,15 @@
+function W = pixelate3_rectangulos(I, w1,w2)
+    [n, m, ~] = size(I);
+    W = I;
+    
+    for row = w1 + 1 : 2 * w1 + 1 : n + w1
+        for column = w2 + 1 : 2 * w2 + 1 : m + w2
+            row_upper = upper(row + w1, n,n);
+            column_upper = upper(column + w2, m,m);
+            sub_image = I(row - w1 : row_upper, column - w2 : column_upper);
+            average = mean(mean(sub_image));
+            W(row - w1 : row_upper, column - w2 : column_upper) = average .* ...
+                ones(row_upper - row + w1 + 1, column_upper - column + w2 + 1);
+        end
+    end
+end
